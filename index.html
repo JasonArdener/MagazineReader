@@ -1,0 +1,354 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Edition Title</title>
+	<meta name="description" content="The latest editions, online. Powered by PageSuite.">
+	<meta name="author" content="PageSuite - Publisher">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<link rel="stylesheet/less" href="less/style.less">
+	<script src="js/libs/less-1.3.0.min.js"></script>
+	<script src="js/libs/iscroll.js"></script>
+
+	<script src="js/libs/modernizr-2.5.3-respond-1.1.0.min.js"></script>
+</head>
+<body>
+<!--[if lt IE 7]><p class=chromeframe>Your browser is <em>out dated.</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+
+	<!-- Top bar start -->
+	<header>
+		<div id="top-left" class="hidden-phone">
+			<a href="#" target="_blank">
+				<h1>PageSuite</h1>
+			</a>
+		</div>
+		
+		<div id="top-cent">
+			<nav>
+				<div class="btn-group hidden-tiny">
+					<button class="btn btn-inverse" onclick="firstButton()"  title="First page"><<</button>
+					<button class="btn btn-inverse" onclick="previousButton()"  title="Previous page">Prev</button>
+				</div>
+				
+				<div class="page-num">0 of 00</div>
+				
+				<div class="btn-group hidden-tiny">
+					<button class="btn btn-inverse" onclick="nextButton()"  title="Next page">Next</button>
+					<button class="btn btn-inverse" onclick="lastButton()"  title="Last page">>></button>
+				</div>
+			</nav>
+		</div>
+		
+		<div id="top-right">
+			<form id="search" class="hidden-phone">
+				<input type="text" class="input-medium search-query hidden-phone" placeholder="Search" id="search-bar">
+				<input type="submit" value="" id="search-submit" class="hidden-phone">
+			</form>
+		</div>
+	</header>
+	<!-- Top bar end -->
+	
+	
+	<!-- Side buttons start -->
+	<a id="left-but" onclick="previousButton()"  title="Previous page"></a>
+	<a id="right-but" onclick="nextButton()"  title="Next page"></a>
+	
+	<a id="left-mag" onclick="viewer.viewport.zoomBy(0.5, null, true);"  title="Zoom out"></a>
+	<a id="right-mag" onclick="viewer.viewport.zoomBy(2, null, true);"  title="Zoom in"></a>
+	<!-- Side buttons end -->
+	
+	
+	<!-- Reader start -->
+    <div id="reader">
+    </div>
+	<!-- Reader end -->
+	
+	
+	<!-- Footer start -->
+	<footer>
+		<ul id="tabs" class="hidden-phone">
+			<li><a class="icon_share" title="Share this edition"></a></li>
+			<li><a class="icon_bookmark"  title="Bookmark this page"></a></li>
+			<li><a class="icon_download"  title="Download pages"></a></li>
+			<li><a class="icon_print"  title="Print pages"></a></li>
+			<li><a class="icon_pages"  title="View pages"></a></li>
+			<li><a class="icon_help"  title="Help"></a></li>
+		</ul>
+		
+		<div class="visible-phone dropdown btn btn-inverse" id="menu1" data-toggle="dropdown" href="#menu1">
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
+			  Menu
+			  <b class="caret"></b>
+			</a>
+			<ul class="dropdown-menu bottom-up">
+			  <li><a class="icon_share" href="#" title="Share this edition">Share</a></li>
+			  <li><a class="icon_bookmark" href="#"  title="Bookmark this page">Bookmark</a></li>
+			  <li><a class="icon_download" href="#"  title="Download pages">Download</a></li>
+			  <li><a class="icon_print" href="#"  title="Print pages">Print</a></li>
+			  <li><a class="icon_pages" href="#"  title="View pages">Pages</a></li>
+			  <li><a class="icon_search" href="#"  title="Search edition">Search</a></li>
+			  <li><a class="icon_goto" href="#"  title="Go to page">Go To Page</a></li>
+			  <li><a class="icon_help" href="#"  title="Help">Help</a></li>
+			</ul>
+		 </div>
+	</footer>
+	<!-- Footer end -->
+	
+	
+	<!-- Full screen button start -->
+	<span id="fScreen"><a id="icon_resize"  title="Go fullscreen"></a></span>
+	<!-- Full screen button end -->
+	
+	
+	<!-- *********************** -->
+	<!-- *** START OF MODALS *** -->
+	<!-- *********************** -->
+	
+	<!-- Download Modal start -->
+	<div class="modal hide fade in" id="download_modal">
+		<div class="modal-header">
+			<button class="close" data-dismiss="modal">×</button>
+			<h3>Download</h3>
+		</div>
+		<div class="yel_head">
+			<form id="blah" class="">
+				<button class="btn btn-primary select_but">Select All</button>
+				<button class="btn btn-inverse unselect_but disabled">Select None</button>
+			</form>
+		</div>
+		<div class="modal-body">
+			<div class="alert alert-info">
+				You can download pages as a PDF to your computer or mobile device.
+			</div>
+			
+			<ul class="page_list">
+			</ul>
+			
+			
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+			<a href="#" id="but_download" class="btn btn-primary disabled">Download</a>
+		</div>
+	</div>
+	<!-- Download Modal end -->
+	
+	<!-- Print Modal start -->
+	<div class="modal hide fade in" id="print_modal">
+		<div class="modal-header">
+			<button class="close" data-dismiss="modal">×</button>
+			<h3>Print</h3>
+		</div>
+		<div class="yel_head">
+			<form id="blah" class="">
+				<button class="btn btn-primary select_but">Select All</button>
+				<button class="btn btn-inverse unselect_but disabled">Select None</button>
+			</form>
+		</div>
+		<div class="modal-body">
+			<div class="alert alert-info">
+				You can select and print pages.
+			</div>
+			<ul class="page_list"></ul>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+			<a href="#" id="but_print" class="btn btn-primary disabled">Print</a>
+		</div>
+	</div>
+	<!-- Print Modal end -->
+	
+	<!-- Pages Modal start -->
+	<div class="modal hide fade in" id="pages_modal">
+		<div class="modal-header">
+			<button class="close" data-dismiss="modal">×</button>
+			<h3>Pages</h3>
+		</div>
+		<div class="modal-body">
+			<div class="alert alert-info">
+				Select a page to view.
+			</div>
+			<ul class="page_list"></ul>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+		</div>
+	</div>
+	<!-- Print Modal end -->
+	
+	<!-- Share Modal start -->
+	<div class="modal hide fade in" id="share_modal">
+		<div class="modal-header">
+			<button class="close" data-dismiss="modal">×</button>
+			<h3>Share</h3>
+		</div>
+		<div class="modal-body">
+			<div class="alert alert-info">
+				You can share this edition using your favourite method of social networking.
+			</div>
+
+			<span class='st_sharethis_large' displayText='ShareThis'></span>
+			<span class='st_email_large' displayText='Email'></span>
+			<span class='st_facebook_large' displayText='Facebook'></span>
+			<span class='st_twitter_large' displayText='Tweet'></span>
+			<span class='st_pinterest_large' displayText='Pinterest'></span>
+			<span class='st_plusone_large' displayText='Google +1'></span>
+			<span class='st_linkedin_large' displayText='LinkedIn'></span>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+		</div>
+	</div>
+	<!-- Share Modal end -->
+	
+	<!-- Search Modal start -->
+	<div class="modal hide fade in" id="search_modal">
+		<div class="modal-header">
+			<button class="close" data-dismiss="modal">×</button>
+			<h3>Search</h3>
+		</div>
+		<div class="yel_head">
+			<form id="search2" class="">
+				<input type="text" class="input-medium search-query" placeholder="Search">
+				<button type="submit" class="btn">Search</button>
+			</form>
+		</div>
+		<div class="modal-body">
+			<ul id="search_results"><li>No results found.</li></ul>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+		</div>
+	</div>
+	<!-- Search Modal end -->
+	
+	<!-- Bookmark Modal start -->
+	<div class="modal hide fade in" id="bookmark_modal">
+		<div class="modal-header">
+			<button class="close" data-dismiss="modal">×</button>
+			<h3>Bookmark Page</h3>
+		</div>
+		<div class="yel_head">
+			<form id="blah" class="">
+				<button id="delete_bookmarks" class="btn btn-danger">Delete All</button>
+			</form>
+		</div>
+		<div class="modal-body">
+			<div class="alert alert-info">
+				You can bookmark pages for reading at a later date.
+			</div>
+			<div id="book_body"></div>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+			<a href="#" id="but_bookmark" class="btn btn-primary">Bookmark This Page</a>
+		</div>
+	</div>
+	<!-- Bookmark Modal end -->
+	
+	<!-- Go To Page Modal start -->
+	<div class="modal hide fade in" id="goto_modal">
+		<div class="modal-header">
+			<button class="close" data-dismiss="modal">×</button>
+			<h3>Go To Page</h3>
+		</div>
+		<div class="modal-body">
+			<div class="alert alert-info">
+				Enter a page number to go to.
+			</div>
+			<form id="goto_form" action=""><input type="text" class="input-medium search-query"></form>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+			<a href="#" id="but_goto" class="btn btn-primary">Go To Page</a>
+		</div>
+	</div>
+	<!-- Go To Page Modal end -->
+	
+	<!-- Help Modal start -->
+	<div class="modal hide fade in" id="help_modal">
+		<div class="modal-header">
+			<button class="close" data-dismiss="modal">×</button>
+			<h3>Help</h3>
+		</div>
+		<div class="modal-body">
+			<div class="alert alert-info">
+				Placeholder
+			</div>
+			Placeholder text.
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+		</div>
+	</div>
+	<!-- Help Modal end -->
+	
+	
+	
+	<!-- ************************ -->
+	<!-- *** START OF SCRIPTS *** -->
+	<!-- ************************ -->
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.2.min.js"><\/script>')</script>
+
+	<script src="js/libs/bootstrap/bootstrap.min.js"></script>
+	<script src="js/seadragon-dev.js"></script>
+	<script src="js/globals.js"></script>
+	<script src="js/print.js"></script>
+	<script src="js/download.js"></script>
+	<script src="js/pages.js"></script>
+	<script src="js/search.js"></script>
+	<script src="js/goto.js"></script>
+	<script src="js/share.js"></script>
+	<script src="js/bookmarks.js"></script>
+	<script src="js/help.js"></script>
+	<script src="js/cookies.js"></script>
+	<script src="js/jquery.fullscreen-min.js"></script>
+	
+	<script type="text/javascript">var switchTo5x=true;</script>
+	<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+	<script type="text/javascript">stLight.options({publisher: "ur-89052195-efa-7d55-d464-c2b4b0815e2a"}); </script>
+	
+	<script src="js/viewport.js"></script>
+	<script src="js/reader.js"></script>
+	<script src="js/script.js"></script>
+	<script src="js/links.js"></script>
+	<!--
+	<script type="text/javascript">
+
+		function setProgress(p, m) {
+			$("#myProgress").attr("max", m).attr("value",p);
+		}
+
+		function cacheImages(loc) {
+			$.getJSON("cache.php",{location:loc},
+				function(data) {
+					var numImages = data.length;
+					var progress = 0;
+		 
+					$.each(data, function(i, image) {
+						var img= new Image();
+						img.onload = function() {  
+							progress++;
+							setProgress(progress, numImages);
+						}
+						img.src = image;
+					});
+				}
+			);
+		}
+
+	</script>
+	-->
+</body>
+</html>
